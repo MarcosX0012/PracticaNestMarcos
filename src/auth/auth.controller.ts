@@ -8,18 +8,18 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('login')
-  async login(
-    @Body() data: LoginDto
-  ) {
-    const usertoken = await this.authService.validateUser(data);
+async login(
+  @Body() data: LoginDto
+) {
+  const usertoken = await this.authService.validateUser(data);
 
-    if (!usertoken) {
-      throw new HttpException(
-        'Invalid credentials',
-        HttpStatus.UNAUTHORIZED
-      );
-    }
-
-    return usertoken;
+  if (!usertoken) {
+    throw new HttpException(
+      'Invalid credentials',
+      HttpStatus.UNAUTHORIZED
+    );
   }
+
+  return usertoken;
+}
 }

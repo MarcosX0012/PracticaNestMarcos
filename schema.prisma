@@ -1,10 +1,10 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model User {
@@ -16,14 +16,8 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   role      Role
-
-  tenantId Int
-  tenant   Tenant @relation(fields: [tenantId], references: [id])
-}
-
-enum Role {
-  USER
-  ADMIN
+  tenantId  Int
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
 }
 
 model Tenant {
@@ -31,6 +25,10 @@ model Tenant {
   name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  users     User[]
+}
 
-  users User[]
+enum Role {
+  USER
+  ADMIN
 }
