@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Role } from '@prisma/client/wasm';
 
 export class CreateUserDto {
   @ApiProperty({ required: true, example: 'usuario@empresa.com' })
@@ -15,5 +16,11 @@ export class CreateUserDto {
   @ApiProperty({ required: true, example: 1, description: 'ID del tenant' })
   tenantId: number;
 
+  @ApiProperty({
+    required: true,
+    enum: Role,
+    example: 'USER'
+  })
+  role: Role;
 }
 

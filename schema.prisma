@@ -8,17 +8,29 @@ generator client {
 }
 
 model User {
-id        Int       @id @default(autoincrement())
-email     String    @unique
-name      String?
-password  String
-telephone String?
-createdAt DateTime  @default(now())
-updatedAt DateTime  @updatedAt
-role      Role
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  password  String
+  telephone String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  role      Role
+
+  tenantId Int
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
 }
 
 enum Role {
   USER
   ADMIN
+}
+
+model Tenant {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users User[]
 }
