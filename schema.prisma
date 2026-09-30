@@ -19,6 +19,6 @@ role      Role
 }
 
 enum Role {
-USER
-ADMIN
+  USER
+  ADMIN
 }
